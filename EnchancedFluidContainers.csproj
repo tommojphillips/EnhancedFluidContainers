@@ -43,18 +43,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomFsmAction.cs" />
+    <Compile Include="EnchancedFluidContainerMono.cs" />
     <Compile Include="EnchancedFluidContainersMod.cs" />
+    <Compile Include="EnchancedFluidContainerStoreMono.cs" />
+    <Compile Include="FluidContainersEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)" == "Debug" (
-copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\My Summer Car\Mods" /y
-copy "$(TargetDir)$(TargetName).pdb" "C:\Program Files (x86)\Steam\steamapps\common\My Summer Car\Mods" /y
-cd "C:\Program Files (x86)\Steam\steamapps\common\My Summer Car\Mods"
-call "C:\Program Files (x86)\Steam\steamapps\common\My Summer Car\Mods\debug.bat"
+copy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
+copy "$(TargetDir)$(TargetName).pdb" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
+cd "D:\SteamLibrary\steamapps\common\My Summer Car\Mods"
+call "D:\SteamLibrary\steamapps\common\My Summer Car\Mods\debug.bat"
 ) ELSE (
-copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\My Summer Car\Mods" /y
+copy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
