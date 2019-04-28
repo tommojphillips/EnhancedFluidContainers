@@ -20,7 +20,15 @@ namespace TommoJProductions.EnchancedFluidContainers
 
         #region Fields
 
-        private Dictionary<FluidContainersEnum, string> fluidContainers;
+        internal static Dictionary<FluidContainersEnum, string> fluidContainers =>  
+            new Dictionary<FluidContainersEnum, string>()
+            {
+                { FluidContainersEnum.coolant, "coolant(itemx)" },
+                { FluidContainersEnum.brake_fluid, "brake fluid(itemx)" },
+                { FluidContainersEnum.motor_oil, "motor oil(itemx)" },
+                //{ FluidContainers.diesel, "diesel(itemx)" },
+                //{ FluidContainers.gasoline, "gasoline(itemx)" }
+            };
 
         #endregion
 
@@ -28,25 +36,20 @@ namespace TommoJProductions.EnchancedFluidContainers
         {
             // Written, 06.04.2019
 
-            this.fluidContainers = new Dictionary<FluidContainersEnum, string>();
-            this.fluidContainers.Add(FluidContainersEnum.coolant, "coolant(itemx)");
-            this.fluidContainers.Add(FluidContainersEnum.brake_fluid, "brake fluid(itemx)");
-            this.fluidContainers.Add(FluidContainersEnum.motor_oil, "motor oil(itemx)");
-            //this.fluidContainers.Add(FluidContainers.diesel, "diesel(itemx)");
-            //this.fluidContainers.Add(FluidContainers.gasoline, "gasoline(itemx)");
-            this.setFluidContainers();
-            EnchancedFluidContainerStoreMono enchancedFluidContainerStoreMono = GameObject.Find("STORE/StoreCashRegister/Register").AddComponent<EnchancedFluidContainerStoreMono>();
-            enchancedFluidContainerStoreMono.action = setFluidContainers;
+            // Setting up current fluid containers in the world.
+            setFluidContainers();
+            // Setting up store hooks etc.
+            GameObject.Find("STORE/StoreCashRegister/Register").AddComponent<EnchancedFluidContainer_StoreMono>();
 
             ModConsole.Print(string.Format("{0} v{1}: Loaded", this.Name, this.Version));
         }
 
-        private void setFluidContainers()
+        internal static void setFluidContainers()
         {
             // Written, 06.04.2019
 
             // getting all instances of vaild fluid containers..
-            foreach (KeyValuePair<FluidContainersEnum, string> _fluidContainers in this.fluidContainers)
+            foreach (KeyValuePair<FluidContainersEnum, string> _fluidContainers in fluidContainers)
             {
                 foreach (GameObject fluidContainerGo in Object.FindObjectsOfType<GameObject>().Where(_go => _go.name == _fluidContainers.Value))
                 {
