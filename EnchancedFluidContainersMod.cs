@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using MSCLoader;
 
-namespace TommoJProductions.EnchancedFluidContainers
+namespace TommoJProductions.EnhancedFluidContainers
 {
     public class EnchancedFluidContainersMod : Mod
     {
@@ -98,7 +98,7 @@ namespace TommoJProductions.EnchancedFluidContainers
             // Setting up current fluid containers in the world.
             setFluidContainers();
             // Setting up store hooks etc.
-            GameObject.Find("STORE/StoreCashRegister/Register").AddComponent<EnchancedFluidContainer_StoreMono>();
+            GameObject.Find("STORE/StoreCashRegister/Register").AddComponent<EnhancedFluidContainer_StoreMono>();
 
             ModConsole.Print(string.Format("{0} v{1}: Loaded", this.Name, this.Version));
         }
@@ -112,11 +112,11 @@ namespace TommoJProductions.EnchancedFluidContainers
             {
                 foreach (GameObject fluidContainerGo in Object.FindObjectsOfType<GameObject>().Where(_go => _go.name == _fluidContainers.Value))
                 {
-                    EnchancedFluidContainerMono fluidContainerMono = fluidContainerGo.GetComponent<EnchancedFluidContainerMono>();
+                    EnhancedFluidContainerMono fluidContainerMono = fluidContainerGo.GetComponent<EnhancedFluidContainerMono>();
 
                     if (fluidContainerMono is null)
                     {
-                        fluidContainerMono = fluidContainerGo.AddComponent<EnchancedFluidContainerMono>();
+                        fluidContainerMono = fluidContainerGo.AddComponent<EnhancedFluidContainerMono>();
                         fluidContainerMono.triggers = fluidContainerTriggers[_fluidContainers.Key];
                         fluidContainerMono.type = _fluidContainers.Key;
 #if DEBUG

@@ -1,4 +1,4 @@
-﻿namespace TommoJProductions.EnchancedFluidContainers
+﻿namespace TommoJProductions.EnhancedFluidContainers
 {
     internal enum FluidContainersEnum
     {

@@ -3,12 +3,12 @@ using UnityEngine;
 using HutongGames.PlayMaker;
 using MSCLoader;
 
-namespace TommoJProductions.EnchancedFluidContainers
+namespace TommoJProductions.EnhancedFluidContainers
 {
     /// <summary>
     /// 
     /// </summary>
-    internal class EnchancedFluidContainer_StoreMono : MonoBehaviour
+    internal class EnhancedFluidContainer_StoreMono : MonoBehaviour
     {
         // Written, 17.04.2019
 

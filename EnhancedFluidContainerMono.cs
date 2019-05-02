@@ -3,12 +3,12 @@ using UnityEngine;
 using HutongGames.PlayMaker;
 using MSCLoader;
 
-namespace TommoJProductions.EnchancedFluidContainers
+namespace TommoJProductions.EnhancedFluidContainers
 {
     /// <summary>
     /// Represents enchanced fluid container logic.
     /// </summary>
-    internal class EnchancedFluidContainerMono : MonoBehaviour
+    internal class EnhancedFluidContainerMono : MonoBehaviour
     {
         // Written, 06.04.2019
 

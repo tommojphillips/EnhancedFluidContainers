@@ -7,8 +7,8 @@
     <ProjectGuid>{B8E3794C-D4CB-487D-A121-1B30117D575C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TommoJProductions.EnchancedFluidContainers</RootNamespace>
-    <AssemblyName>EnchancedFluidContainers</AssemblyName>
+    <RootNamespace>TommoJProductions.EnhancedFluidContainers</RootNamespace>
+    <AssemblyName>EnhancedFluidContainers</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,9 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnchancedFluidContainerMono.cs" />
+    <Compile Include="EnhancedFluidContainerMono.cs" />
     <Compile Include="EnchancedFluidContainersMod.cs" />
-    <Compile Include="EnchancedFluidContainer_StoreMono.cs" />
+    <Compile Include="EnhancedFluidContainer_StoreMono.cs" />
     <Compile Include="FluidContainersEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
