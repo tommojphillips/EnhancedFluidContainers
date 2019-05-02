@@ -25,6 +25,10 @@ namespace TommoJProductions.EnchancedFluidContainers
         /// </summary>
         private FsmInt coolantQuantity;
         /// <summary>
+        /// Represents the quantity of two stroke brought in previous purchase.
+        /// </summary>
+        private FsmInt twoStrokeFuelQuantity;
+        /// <summary>
         /// Represents if logic should check shopping bags for brakefluid.
         /// </summary>
         private bool shoppingBagSpawn = false;
@@ -46,6 +50,7 @@ namespace TommoJProductions.EnchancedFluidContainers
             this.brakefluidQuantity = playMakerFSM.FsmVariables.FindFsmInt("QBrakeFluid");
             this.motorOilQuantity = playMakerFSM.FsmVariables.FindFsmInt("QMotorOil");
             this.coolantQuantity = playMakerFSM.FsmVariables.FindFsmInt("QCoolant");
+            this.twoStrokeFuelQuantity = playMakerFSM.FsmVariables.FindFsmInt("QTwoStroke");
         }
         /// <summary>
         /// Occurs when the player has purchased items at temio's shop.
@@ -56,7 +61,7 @@ namespace TommoJProductions.EnchancedFluidContainers
 
             bool fluidContainerSpawned = false;
 
-            if (this.motorOilQuantity.Value > 0 || this.coolantQuantity.Value > 0)
+            if (this.motorOilQuantity.Value > 0 || this.coolantQuantity.Value > 0 || this.twoStrokeFuelQuantity.Value > 0)
             {
                 fluidContainerSpawned = true;
             }
@@ -101,7 +106,7 @@ namespace TommoJProductions.EnchancedFluidContainers
                             {
                                 FsmHook.FsmInject(shoppingBag, "Play anim", this.fluidContainerSpawned);
 #if DEBUG
-                                ModConsole.Print(string.Format("<b>[fluidContainerSpawned] -</b> Injected shopping bag, (index: {0}).", j));
+                                ModConsole.Print(string.Format("<b>[fluidContainerSpawned] -</b> Injected shopping bag, (index: {0}).", i));
 #endif
                                 break;
                             }

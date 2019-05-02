@@ -13,7 +13,7 @@ namespace TommoJProductions.EnchancedFluidContainers
 
         public override string ID => "EnchancedFluidContainers";
         public override string Name => "Enchanced Fluid Containers";
-        public override string Version => "0.1.2";
+        public override string Version => "0.1.4";
         public override string Author => "tommojphillips";
 
         #endregion
@@ -26,6 +26,7 @@ namespace TommoJProductions.EnchancedFluidContainers
                 { FluidContainersEnum.coolant, "coolant(itemx)" },
                 { FluidContainersEnum.brake_fluid, "brake fluid(itemx)" },
                 { FluidContainersEnum.motor_oil, "motor oil(itemx)" },
+                { FluidContainersEnum.two_stroke_fuel, "two stroke fuel(itemx)" }
                 //{ FluidContainers.diesel, "diesel(itemx)" },
                 //{ FluidContainers.gasoline, "gasoline(itemx)" }
             };
@@ -71,6 +72,20 @@ namespace TommoJProductions.EnchancedFluidContainers
                             "Trigger"
                         },
                     }
+                },
+                {
+                    FluidContainersEnum.two_stroke_fuel,
+                    new Dictionary<GameObject, string>()
+                    {
+                        {
+                            GameObject.Find("JONNEZ ES(Clone)/LOD/FuelFiller/OpenCap/CapTrigger_TwoStrokeFuel"),
+                            "Trigger"
+                        },
+                        {
+                            GameObject.Find("BOAT/GFX/Motor/Pivot/FuelFiller/OpenCap/CapTrigger_TwoStrokeFuel"),
+                            "Trigger"
+                        }
+                    }
                 }
             };
 
@@ -105,13 +120,8 @@ namespace TommoJProductions.EnchancedFluidContainers
                         fluidContainerMono.triggers = fluidContainerTriggers[_fluidContainers.Key];
                         fluidContainerMono.type = _fluidContainers.Key;
 #if DEBUG
-                        ModConsole.Print(string.Format("<b>[setFluidContainers] -</b> Vaild fluid container found withOUT efcm addition, '{0}'", fluidContainerGo.name));
-#endif
-                    }
-                    else
-                    {
-#if DEBUG
-                        ModConsole.Print(string.Format("<b>[setFluidContainers] -</b> Vaild fluid container found with efcm addition, '{0}'", fluidContainerGo.name));
+                        if (ModLoader.allModsLoaded) // Prevent start-up spam.
+                            ModConsole.Print(string.Format("<b>[setFluidContainers] -</b> Vaild fluid container found withOUT efcm addition, '{0}'", fluidContainerGo.name));
 #endif
                     }
                 }
