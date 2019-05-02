@@ -153,7 +153,7 @@ namespace TommoJProductions.EnchancedFluidContainers
             string fluidAmountDisplay = " - ";
 
             if (this.fluidContainerAmount.Value < 1)
-                fluidAmountDisplay += (this.fluidContainerAmount.Value * 100).ToString("F2") + "ML";
+                fluidAmountDisplay += (this.fluidContainerAmount.Value * 1000).ToString("F2") + "ML";
             else
                 fluidAmountDisplay += this.fluidContainerAmount.Value.ToString("F2") + "L";
 
