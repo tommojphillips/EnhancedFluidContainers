@@ -5,7 +5,8 @@
         motor_oil,
         coolant,
         brake_fluid,
-        gasoline,
-        diesel
+        two_stroke_fuel,
+        //gasoline,
+        //diesel
     }
 }

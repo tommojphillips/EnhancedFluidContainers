@@ -123,6 +123,9 @@ namespace TommoJProductions.EnchancedFluidContainers
                             case FluidContainersEnum.motor_oil:
                                 fluidLevel = trigger.FsmVariables.FindFsmFloat("OilLevel").Value;
                                 break;
+                            case FluidContainersEnum.two_stroke_fuel:
+                                fluidLevel = trigger.FsmVariables.FindFsmFloat("FuelLevel").Value;
+                                break;
                             default:
                                 fluidLevel = trigger.FsmVariables.FindFsmFloat("FluidLevel").Value;
                                 break;
