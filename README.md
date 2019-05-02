@@ -13,8 +13,8 @@ Pouring particle effect:
 - Coolant (stock radiator, racing raditator)
 ![Alt Text](https://i.imgur.com/T768tmc.png)
 Pouring particle effect:
-![Alt Text](https://imgur.com/3tG75Ak)
+![Alt Text](https://i.imgur.com/3tG75Ak.png)
 - Two Stoke Fuel (Boat, Mope)
 Pouring particle effect:
-![Alt Text](https://imgur.com/oNr7NHT)
-![Alt Text](https://imgur.com/YsvIZoY)
+![Alt Text](https://i.imgur.com/YsvIZoY.png)
+![Alt Text](https://i.imgur.com/oNr7NHT.png)
