@@ -40,24 +40,25 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MSCLoader">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\My Summer Car\mysummercar_Data\Managed\MSCLoader.dll</HintPath>
+      <HintPath>D:\Games\SteamApps\steamapps\common\My Summer Car\mysummercar_Data\Managed\MSCLoader.dll</HintPath>
     </Reference>
     <Reference Include="PlayMaker">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\My Summer Car\mysummercar_Data\Managed\PlayMaker.dll</HintPath>
+      <HintPath>D:\Games\SteamApps\steamapps\common\My Summer Car\mysummercar_Data\Managed\PlayMaker.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\My Summer Car\mysummercar_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\Games\SteamApps\steamapps\common\My Summer Car\mysummercar_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)" == "Debug" (
-copy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
-copy "$(TargetDir)$(TargetName).pdb" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
-cd "D:\SteamLibrary\steamapps\common\My Summer Car\Mods"
-call "D:\SteamLibrary\steamapps\common\My Summer Car\Mods\debug.bat"
+copy "$(TargetPath)" "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods" /y
+copy "$(TargetDir)$(TargetName).pdb" "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods" /y
+cd "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods"
+call "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods\debug.bat"
+del "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods\$(TargetName).pdb" /q
 ) ELSE (
-copy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\My Summer Car\Mods" /y
+copy "$(TargetPath)" "D:\Games\SteamApps\steamapps\common\My Summer Car\Mods" /y
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

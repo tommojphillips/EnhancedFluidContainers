@@ -13,7 +13,7 @@ namespace TommoJProductions.EnhancedFluidContainers
 
         public override string ID => "EnchancedFluidContainers";
         public override string Name => "Enchanced Fluid Containers";
-        public override string Version => "0.1.4";
+        public override string Version => "0.1.5";
         public override string Author => "tommojphillips";
 
         #endregion
@@ -120,7 +120,6 @@ namespace TommoJProductions.EnhancedFluidContainers
                         fluidContainerMono.triggers = fluidContainerTriggers[_fluidContainers.Key];
                         fluidContainerMono.type = _fluidContainers.Key;
 #if DEBUG
-                        if (ModLoader.allModsLoaded) // Prevent start-up spam.
                             ModConsole.Print(string.Format("<b>[setFluidContainers] -</b> Vaild fluid container found withOUT efcm addition, '{0}'", fluidContainerGo.name));
 #endif
                     }
