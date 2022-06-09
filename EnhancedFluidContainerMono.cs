@@ -12,16 +12,26 @@ namespace TommoJProductions.EnhancedFluidContainers
     {
         // Written, 06.04.2019
 
+        internal class Trigger 
+        {
+            internal FsmBool pouring;
+            internal FsmFloat maxCapacity;
+            internal FsmFloat fluidLevel;
+        }
+
+        internal Trigger[] triggers;
+
+
         #region Fields
 
         /// <summary>
         /// Represents the default name of the fluid container. eg => 'coolant(itemx)'
         /// </summary>
-        private string defaultName;
+        internal string defaultName;
         /// <summary>
         /// Represents the previous fluid (from last frame update) that was last updated. 
         /// </summary>
-        private float previousFluid;
+        private float previousFluid = 0;
         /// <summary>
         /// Represents current amount of fluid in the container.
         /// </summary>
@@ -37,105 +47,39 @@ namespace TommoJProductions.EnhancedFluidContainers
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Represents the type of container this is.
-        /// </summary>
-        internal FluidContainersEnum type
-        {
-            get;
-            set;
-        }
-        /// <summary>
-        /// Represents the triggers for the fluid container.
-        /// </summary>
-        internal Dictionary<GameObject, string> triggers
-        {
-            get;
-            set;
-        }
-
-        #endregion
-
         private void Start()
         {
             // Written, 06.04.2019
 
-            this.defaultName = this.gameObject.name;
-            this.fluidContainerAmount = PlayMakerFSM.FindFsmOnGameObject(this.transform.GetChild(1).gameObject, "Data").FsmVariables.FindFsmFloat("Fluid");
-            this.fluidContainerPouringPosition = PlayMakerFSM.FindFsmOnGameObject(this.transform.GetChild(1).gameObject, "Data").FsmVariables.FindFsmBool("Pouring");
+            PlayMakerFSM p = transform.GetChild(1).GetPlayMaker("Data");
+            fluidContainerAmount = p.FsmVariables.FindFsmFloat("Fluid");
+            fluidContainerPouringPosition = p.FsmVariables.FindFsmBool("Pouring");
         }
 
-        private void Update()
+        internal void Update()
         {
             // Written, 06.04.2019
 
-            try
+            if (previousFluid != fluidContainerAmount.Value || gameObject.name == defaultName)
             {
-                if (this.previousFluid != this.fluidContainerAmount.Value)
+                updateName();
+                foreach (Trigger t in triggers)
                 {
-                    this.updateName();
-                    this.fluidParticles();
-                    this.previousFluid = this.fluidContainerAmount.Value;
-                    this.fluidParticlesChecked = false;
+                    updateFluidParticles(fluidContainerPouringPosition.Value && t.fluidLevel.Value < t.maxCapacity.Value);
                 }
-                else
-                {
-                    if (!this.fluidParticlesChecked)
-                    {
-                        this.updateFluidParticles(false);
-                        this.fluidParticlesChecked = true;
-                    }
-                }
+
+                previousFluid = fluidContainerAmount.Value;
+                fluidParticlesChecked = false;
             }
-            catch (System.Exception ex)
+            else if (!fluidParticlesChecked)
             {
-                ModConsole.Error("Error: " + ex.ToString());
+                updateFluidParticles(false);
+                fluidParticlesChecked = true;
             }
         }
 
         #region Methods
-
-        /// <summary>
-        /// Fluid particles logic
-        /// </summary>
-        private void fluidParticles()
-        {
-            // Written, 06.04.2019
-
-            if (this.triggers == null)
-                return;
-
-            foreach (KeyValuePair<GameObject, string> _trigger in this.triggers)
-            {
-                PlayMakerFSM trigger = PlayMakerFSM.FindFsmOnGameObject(_trigger.Key, _trigger.Value);
-
-                if (trigger != null)
-                {
-                    if (trigger.FsmVariables.FindFsmBool("Pouring").Value)
-                    {
-                        float maxCapacity = trigger.FsmVariables.FindFsmFloat("MaxCapacity").Value;
-                        float fluidLevel;
-
-                        switch (this.type)
-                        {
-                            case FluidContainersEnum.motor_oil:
-                                fluidLevel = trigger.FsmVariables.FindFsmFloat("OilLevel").Value;
-                                break;
-                            case FluidContainersEnum.two_stroke_fuel:
-                                fluidLevel = trigger.FsmVariables.FindFsmFloat("FuelLevel").Value;
-                                break;
-                            default:
-                                fluidLevel = trigger.FsmVariables.FindFsmFloat("FluidLevel").Value;
-                                break;
-                        }
-                        this.updateFluidParticles(this.fluidContainerPouringPosition.Value && fluidLevel < maxCapacity);
-                    }
-                    break;
-                }
-            }
-        }
+                
         /// <summary>
         /// Updates the fluid particles with the param.
         /// </summary>
@@ -144,7 +88,7 @@ namespace TommoJProductions.EnhancedFluidContainers
         {
             // Written, 16.04.2019
 
-            this.transform.GetChild(0).gameObject.SetActive(inActive);
+            transform.GetChild(0).gameObject.SetActive(inActive);
         }
         /// <summary>
         /// Updates the name of the fluid container with the current fluid amount (in l or ml)
@@ -155,12 +99,18 @@ namespace TommoJProductions.EnhancedFluidContainers
 
             string fluidAmountDisplay = " - ";
 
-            if (this.fluidContainerAmount.Value < 1)
-                fluidAmountDisplay += (this.fluidContainerAmount.Value * 1000).ToString("F2") + "ML";
+            if (fluidContainerAmount.Value < 1)
+                fluidAmountDisplay += (fluidContainerAmount.Value * 1000).ToString("F2") + "ML";
             else
-                fluidAmountDisplay += this.fluidContainerAmount.Value.ToString("F2") + "L";
+                fluidAmountDisplay += fluidContainerAmount.Value.ToString("F2") + "L";
 
-            this.gameObject.name = this.defaultName.Insert(this.defaultName.IndexOf("(itemx)"), fluidAmountDisplay);
+            int index = defaultName?.IndexOf("(itemx)") ?? -1;
+            if (index >= 0 && index < defaultName.Length-1)
+            gameObject.name = defaultName.Insert(index, fluidAmountDisplay);
+        }
+        internal void setDefaultName() 
+        {
+            defaultName = gameObject.name;
         }
 
         #endregion
